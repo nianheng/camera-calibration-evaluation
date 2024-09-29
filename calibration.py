@@ -223,27 +223,27 @@ pose_H_E = np.hstack((t_H_E, q_H_E))
 print(f"rmse_position: {rmse_position}")
 print(f"rmse_orientation: {rmse_orientation}")
 
-dq_B_H_0 = DualQuaternion.from_pose_vector(pose_B_H[0])
-dq_W_E_0 = DualQuaternion.from_pose_vector(pose_W_E[0]).inverse()
-dq_H_E = DualQuaternion.from_pose_vector(pose_H_E)
-dq_B_W_0 = dq_B_H_0 * dq_H_E * dq_W_E_0.inverse()
-dq_B_W_0.normalize()
+# dq_B_H_0 = DualQuaternion.from_pose_vector(pose_B_H[0])
+# dq_W_E_0 = DualQuaternion.from_pose_vector(pose_W_E[0]).inverse()
+# dq_H_E = DualQuaternion.from_pose_vector(pose_H_E)
+# dq_B_W_0 = dq_B_H_0 * dq_H_E * dq_W_E_0.inverse()
+# dq_B_W_0.normalize()
 
 
-for i in range(0, 6):
-    pos_vec = t_target2cam[i].flatten() / 100 - [0, 0, 5]
-    rot_vec = pos_vec + R_target2cam[i].dot(np.array([0, 0, 1]))
+# for i in range(0, 6):
+#     pos_vec = t_target2cam[i].flatten() / 100 - [0, 0, 5]
+#     rot_vec = pos_vec + R_target2cam[i].dot(np.array([0, 0, 1]))
 
-    dq_B_H_i = DualQuaternion.from_pose_vector(pose_B_H[i])
-    dq_W_E_estimate = dq_B_W_0.inverse() * dq_B_H_i * dq_H_E
-    dq_W_E_estimate = dq_W_E_estimate.inverse()
+#     dq_B_H_i = DualQuaternion.from_pose_vector(pose_B_H[i])
+#     dq_W_E_estimate = dq_B_W_0.inverse() * dq_B_H_i * dq_H_E
+#     dq_W_E_estimate = dq_W_E_estimate.inverse()
 
-    pose_W_E_estimate = dq_W_E_estimate.to_pose().T
-    pos_vec_estimate = pose_W_E_estimate[:3] / 100 - [0, 0, 5]
-    rot_vec_estimate = pos_vec_estimate + quat2matrix(pose_W_E_estimate[3:]).dot(np.array([0, 0, 1]))
+#     pose_W_E_estimate = dq_W_E_estimate.to_pose().T
+#     pos_vec_estimate = pose_W_E_estimate[:3] / 100 - [0, 0, 5]
+#     rot_vec_estimate = pos_vec_estimate + quat2matrix(pose_W_E_estimate[3:]).dot(np.array([0, 0, 1]))
 
-    # rot_vec = pos_vec + np.array([1, 1, 1]).dot(R_target2cam[i])
-    with open(f'F:/work/paper/PE/CameraViewer-main/inputs/quick/debug1/poses/{i}.txt', 'w') as file:
-        file.write(f'{pos_vec[0]} {pos_vec[1]} {pos_vec[2]}\n{rot_vec[0]} {rot_vec[1]} {rot_vec[2]}\n0 0 1')
-    with open(f'F:/work/paper/PE/CameraViewer-main/inputs/quick/debug1/poses/{6+i}.txt', 'w') as file:
-        file.write(f'{pos_vec_estimate[0]} {pos_vec_estimate[1]} {pos_vec_estimate[2]}\n{rot_vec_estimate[0]} {rot_vec_estimate[1]} {rot_vec_estimate[2]}\n0 0 1')
+#     # rot_vec = pos_vec + np.array([1, 1, 1]).dot(R_target2cam[i])
+#     with open(f'F:/work/paper/PE/CameraViewer-main/inputs/quick/debug1/poses/{i}.txt', 'w') as file:
+#         file.write(f'{pos_vec[0]} {pos_vec[1]} {pos_vec[2]}\n{rot_vec[0]} {rot_vec[1]} {rot_vec[2]}\n0 0 1')
+#     with open(f'F:/work/paper/PE/CameraViewer-main/inputs/quick/debug1/poses/{6+i}.txt', 'w') as file:
+#         file.write(f'{pos_vec_estimate[0]} {pos_vec_estimate[1]} {pos_vec_estimate[2]}\n{rot_vec_estimate[0]} {rot_vec_estimate[1]} {rot_vec_estimate[2]}\n0 0 1')
