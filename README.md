@@ -9,6 +9,8 @@
 ### 使用方法：
 图片放在 data/chessboard/ 中，位姿文件放在 data/chessboard/pose.xml 中
 
+python=3.9.19
+
 `conda install --yes --file requirements.txt`
 
 `python calibration.py`
