@@ -11,6 +11,4 @@
 
 python=3.9.19
 
-`conda install --yes --file requirements.txt`
-
 `python calibration.py`
