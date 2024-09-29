@@ -7,5 +7,6 @@
 [评估部分更改自](https://github.com/ethz-asl/hand_eye_calibration)
 
 ### 使用方法：
+图片放在 data/chessboard/ 中，位姿文件放在 data/chessboard/pose.xml 中
 
 `python calibration.py`
